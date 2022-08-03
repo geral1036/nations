@@ -16,5 +16,16 @@ class Continent extends Model
     //omitir campos de auditoria
     public $timestamp=false;
 
+    //relacion entre contiente y region
+    public function regiones(){
+        //relacion de uno a muchos con el modelo
+        return $this->hasMany(Region::class, 'continent_id');
+    }
+
+    //relacion entre continente y pais
+    public function paises(){
+        return $this->hasManyThrough(Region::class, Country::class, 'continent_id', 'region_id');
+    }
+
     use HasFactory;
 }
